@@ -1,4 +1,3 @@
-// pages/index.js
 import Head from 'next/head';
 import {BiUserPlus} from "react-icons/bi";
 import Table from '../components/table';
