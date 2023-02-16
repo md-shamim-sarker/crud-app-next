@@ -5,7 +5,6 @@ import Form from '../components/form';
 import {useState} from 'react';
 
 export default function Home() {
-
   const [visible, setVisible] = useState(false);
 
   const handler = () => {
@@ -38,7 +37,6 @@ export default function Home() {
         <div className="container mx-auto">
           <Table></Table>
         </div>
-
       </main>
     </section>
   );
