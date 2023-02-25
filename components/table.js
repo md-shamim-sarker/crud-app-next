@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import {getUsers} from "@/lib/helper";
+import {toggleChangeAction, updateAction} from "@/redux/reducer";
 import {BiEdit, BiTrashAlt} from "react-icons/bi";
 import {useQuery} from "react-query";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Table() {
 
@@ -43,7 +45,18 @@ export default function Table() {
     );
 }
 
-function Tr({id, name, avatar, email, salary, date, status}) {
+function Tr({_id, name, avatar, email, salary, date, status}) {
+
+    const visible = useSelector((state) => state.app.client.toggleForm);
+    const dispatch = useDispatch();
+
+    const onUpdate = () => {
+        dispatch(toggleChangeAction(_id));
+        if(visible) {
+            dispatch(updateAction(_id));
+        }
+    };
+
     return (
         <tr className="bg-gray-50 text-center">
             <td className="px-16 py-2 flex flex-row items-center">
@@ -63,7 +76,7 @@ function Tr({id, name, avatar, email, salary, date, status}) {
                 <button className="cursor"><span className={`${status == "Active" ? 'bg-green-500' : 'bg-rose-500'} text-white px-5 py-1 rounded-full`}>{status || "Unknown"}</span></button>
             </td>
             <td className="px-16 py-2">
-                <button className="cursor"><BiEdit size={23} color={"rgb(34,197,94)"}></BiEdit></button>
+                <button onClick={onUpdate} className="cursor"><BiEdit size={23} color={"rgb(34,197,94)"}></BiEdit></button>
                 <button className="cursor ml-7"><BiTrashAlt size={23} color={"rgb(244,63,94)"}></BiTrashAlt></button>
             </td>
         </tr>
